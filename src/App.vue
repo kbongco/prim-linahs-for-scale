@@ -18,43 +18,49 @@ watch(selectedConversionUnit, (newValue) => {
 
 function convert() {
   if (selectedConversionUnit.value === 'prim') {
-    return totalInPrims.value;
+    return totalInPrims.value
   } else if (selectedConversionUnit.value === 'felinah') {
-    return totalinFelinahs.value;
+    return totalinFelinahs.value
   }
 }
 </script>
 
 <template>
   <h1>Prim-Linahs for scale</h1>
-  <p>1 Prim is equal to {{ primConversionUnit }}lbs</p>
-  <p>1 Felinah is equal to {{ felinahConversionUnit }}lbs</p>
-  <form>
+  <p class='weight-conversion-factor'>1 Prim is equal to {{ primConversionUnit }}lbs</p>
+  <p class='weight-conversion-factor'>1 Felinah is equal to {{ felinahConversionUnit }}lbs</p>
+  <form class='form-data-overall'>
+    <div class='form-container'>
     <div>
-      <label> Current Value </label>
-      <!-- If you are using a number it has to be v-model.number otherwise there will be a type mismatch  -->
-      <input v-model.number="value" placeholder="Add here" />
-      <p>Current value is {{ value }}</p>
+      <div>
+        <label> Current Value </label>
+        <!-- If you are using a number it has to be v-model.number otherwise there will be a type mismatch  -->
+        <input v-model.number="value" placeholder="Add here" />
+      </div>
     </div>
     <div>
-      <label>Convert with?</label>
-      <!-- v-model is for two way data binding for form elements
+      <div>
+        <label>Convert with?</label>
+        <!-- v-model is for two way data binding for form elements
         if it is an input it listens to the input event for dropdowns it binds to the value and listens to the options
       -->
-      <select v-model="selectedConversionUnit">
-        <option v-for="friend in primLinahs" :key="friend" :value="friend">
-          {{ friend }}
-        </option>
-      </select>
+        <select v-model="selectedConversionUnit">
+          <option v-for="friend in primLinahs" :key="friend" :value="friend">
+            {{ friend }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div>
-      <!-- .prevent is the equivalent of doing e.preventDefault above -->
-      <button @click.prevent="convert()">Convert</button>
-    </div>
+  </div>
   </form>
 
   <div>
     <p>Your total is:</p>
+    <div v-if="selectedConversionUnit === 'prim'">{{ totalInPrims }} in Prims</div>
+    <div v-else-if="selectedConversionUnit === 'felinah'">{{ totalinFelinahs }} in Felinahs</div>
+    <div v-else>
+      <p></p>
+    </div>
   </div>
 </template>
 
@@ -63,9 +69,16 @@ header {
   line-height: 1.5;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.form-data-overall {
+  padding-top: 16px;
+}
+
+.form-container {
+  display: flex;
+}
+
+.weight-conversion-factor {
+  font-size: 1.3rem;
 }
 
 @media (min-width: 1024px) {
