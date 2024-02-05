@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from 'vue'
-const primLinahs = ref(['prim', 'felinah'])
+const primLinahs = ref(['prim', 'feline'])
 
 onMounted(() => {
   console.log(primLinahs.value)
@@ -28,7 +28,7 @@ function convert() {
 <template>
   <h1>Prim-Linahs for scale</h1>
   <p class='weight-conversion-factor'>1 Prim is equal to {{ primConversionUnit }}lbs</p>
-  <p class='weight-conversion-factor'>1 Felinah is equal to {{ felinahConversionUnit }}lbs</p>
+  <p class='weight-conversion-factor'>1 Feline is equal to {{ felinahConversionUnit }}lbs</p>
   <form class='form-data-overall'>
     <div class='form-container'>
     <div>
@@ -57,7 +57,7 @@ function convert() {
   <div>
     <p>Your total is:</p>
     <div v-if="selectedConversionUnit === 'prim'">{{ totalInPrims }} in Prims</div>
-    <div v-else-if="selectedConversionUnit === 'felinah'">{{ totalinFelinahs }} in Felinahs</div>
+    <div v-else-if="selectedConversionUnit === 'felinah'">{{ totalinFelinahs }} in Felines</div>
     <div v-else>
       <p></p>
     </div>
