@@ -13,8 +13,16 @@ const totalInPrims = computed(() => value.value / primConversionUnit.value)
 const totalinFelinahs = computed(() => value.value / felinahConversionUnit.value)
 const selectedConversionUnit = ref('')
 watch(selectedConversionUnit, (newValue) => {
-  console.log(newValue);
+  console.log(newValue)
 })
+
+function convert() {
+  if (selectedConversionUnit.value === 'prim') {
+    return totalInPrims.value;
+  } else if (selectedConversionUnit.value === 'felinah') {
+    return totalinFelinahs.value;
+  }
+}
 </script>
 
 <template>
@@ -39,7 +47,15 @@ watch(selectedConversionUnit, (newValue) => {
         </option>
       </select>
     </div>
+    <div>
+      <!-- .prevent is the equivalent of doing e.preventDefault above -->
+      <button @click.prevent="convert()">Convert</button>
+    </div>
   </form>
+
+  <div>
+    <p>Your total is:</p>
+  </div>
 </template>
 
 <style scoped>
